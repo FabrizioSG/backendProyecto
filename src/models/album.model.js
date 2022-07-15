@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 // schema de album
 const albumSchema = new mongoose.Schema({
-  //user: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
-  user: { type: String, required: true },
+  user: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
   name: { type: String, required: true },
   description: { type: String, required: true}},
 

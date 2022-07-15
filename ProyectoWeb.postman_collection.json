@@ -195,7 +195,138 @@
 		},
 		{
 			"name": "Users",
-			"item": []
+			"item": [
+				{
+					"name": "Registrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Fabrizio\",\r\n    \"first_last_name\": \"salazar\",\r\n    \"second_last_name\": \"gonzalez\",\r\n    \"email\": \"fsg@mail.com\",\r\n    \"password\": \"123456\",\r\n    \"birthday\": \"07/11/1995\",\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fsg@mail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyZDFkZWRiMmFhYWE4Y2JjM2Q0MjNkNiIsIm5hbWUiOiJGYWJyaXppbyIsImZpcnN0X2xhc3RfbmFtZSI6InNhbGF6YXIiLCJzZWNvbmRfbGFzdF9uYW1lIjoiZ29uemFsZXoiLCJlbWFpbCI6ImZzZ0BtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJHFma3U3bHQ0Mk5NREc1YlhzWmlsZS5VLkdWVjJTZ0RwQjcxLnFMRHN0V2Y3cVMvMkk3QTdTIiwiYmlydGhkYXkiOiIxOTk1LTA3LTExVDA2OjAwOjAwLjAwMFoiLCJnZW5kZXIiOiJNIiwiX192IjowfSwiaWF0IjoxNjU3OTIzMDMyLCJleHAiOjE2NTc5MzAyMzJ9.t6m1oM1QLZ2cyF4TAGLEAUEgd6ym3G5YHr8oX25cBcw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"UPDATED again\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyZDFkZWRiMmFhYWE4Y2JjM2Q0MjNkNiIsIm5hbWUiOiJGYWJyaXppbyIsImZpcnN0X2xhc3RfbmFtZSI6InNhbGF6YXIiLCJzZWNvbmRfbGFzdF9uYW1lIjoiZ29uemFsZXoiLCJlbWFpbCI6ImZzZ0BtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJHFma3U3bHQ0Mk5NREc1YlhzWmlsZS5VLkdWVjJTZ0RwQjcxLnFMRHN0V2Y3cVMvMkk3QTdTIiwiYmlydGhkYXkiOiIxOTk1LTA3LTExVDA2OjAwOjAwLjAwMFoiLCJnZW5kZXIiOiJNIiwiX192IjowfSwiaWF0IjoxNjU3OTIzMDMyLCJleHAiOjE2NTc5MzAyMzJ9.t6m1oM1QLZ2cyF4TAGLEAUEgd6ym3G5YHr8oX25cBcw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

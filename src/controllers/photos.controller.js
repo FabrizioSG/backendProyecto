@@ -25,7 +25,7 @@ const addPhoto = async (req, res, next) => {
 const getPhotosByAlbum = async (req, res) => {
   let photos;
   try {
-    photos = await Photo.findOne({user:req.params.albumId}).exec();
+    photos = await Photo.findOne({ album: req.params.albumId }).exec();
   } catch (err) {
     return next(new HttpError(err, 404));
   }

@@ -1,9 +1,11 @@
 const User = require("../models/user.model");
 const HttpError = require("../models/http-error");
 const { ReasonPhrases, StatusCodes } = require("http-status-codes");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const signUp = async (req, res, next) => {
-  const { name, email, password, cats } = req.body;
+  let { name, first_last_name, second_last_name, email, password, gender, birthday } = req.body;
 
   let existingUser;
 
@@ -16,12 +18,10 @@ const signUp = async (req, res, next) => {
   if (existingUser) {
     return next(new HttpError("User Exists Already", 422));
   }
-
+  password = await bcrypt.hash(password, 10);
+  
   const createdUser = new User({
-    name,
-    email,
-    password,
-    cats,
+    name, first_last_name, second_last_name, email, password, gender, birthday
   });
   try {
     createdUser.save();
@@ -35,26 +35,55 @@ const signUp = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  const { email, password } = req.body;
-  let existingUser;
-
   try {
-    existingUser = await User.findOne({ email: email });
-  } catch (error) {
-    return next(new HttpError("Login Failed", 500));
-  }
+    // Get user input
+    const { email, password } = req.body;
 
-  if (!existingUser || existingUser.password !== password) {
-    return next(new HttpError("Invalid credentials", 401));
-  }
+    // Validate user input
+    if (!(email && password)) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: ReasonPhrases.BAD_REQUEST,
+        data: "Missing username or password"
+      });
+    }
+    // Validate if user exist in our database
+    const user = await User.findOne({ email });
+    if(!user){
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: ReasonPhrases.NOT_FOUND,
+      });
+    }
+    
+    if (user && (await bcrypt.compare(password, user.password))) {
+      // Create token
+      const token = jwt.sign(
+        { user},
+        "my_secret_key",
+        {
+          expiresIn: "2h",
+        }
+      );    
+      
 
-  res.json({ message: "Logged in!!" });
+      // user
+      return res.status(StatusCodes.OK).json({
+        message: ReasonPhrases.OK,
+        data: {token: token, expiresIn: "2 hours"}
+      });
+    }
+    res.status(400).send("Invalid Credentials");
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const updateUser = async (req, res, next) => {
-  const userId = req.params.id;
+
+  const userId = req.user.user._id;
+
   const { name, first_last_name, second_last_name, email, birthday, gender, password } = req.body;
   let user;
+  let token;
   try {
     user = await User.findByIdAndUpdate(
       userId,
@@ -63,13 +92,20 @@ const updateUser = async (req, res, next) => {
         new: true,
       }
     ).exec();
+    token = jwt.sign(
+      { user},
+      "my_secret_key",
+      {
+        expiresIn: "2h",
+      }
+    );
   } catch (err) {
     return next(new HttpError(err, 400));
   }
-  if (album) {
+  if (user) {
     res.status(StatusCodes.OK).json({
       message: ReasonPhrases.OK,
-      data: user.toObject({ getters: true }),
+      data: {user: user.toObject({ getters: true }), token: token}
     });
   } else {
     res.status(StatusCodes.NOT_FOUND).json({
@@ -78,7 +114,7 @@ const updateUser = async (req, res, next) => {
   }
 };
 const deleteUser = async (req, res, next) => {
-  const userId = req.params.id;
+  const userId = req.user.user._id;
   let user;
   try {
     user = await User.findById(userId).exec();
