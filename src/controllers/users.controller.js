@@ -51,5 +51,55 @@ const login = async (req, res, next) => {
   res.json({ message: "Logged in!!" });
 };
 
+const updateUser = async (req, res, next) => {
+  const userId = req.params.id;
+  const { name, first_last_name, second_last_name, email, birthday, gender, password } = req.body;
+  let user;
+  try {
+    user = await User.findByIdAndUpdate(
+      userId,
+      { name, first_last_name, second_last_name, email, birthday, gender, password },
+      {
+        new: true,
+      }
+    ).exec();
+  } catch (err) {
+    return next(new HttpError(err, 400));
+  }
+  if (album) {
+    res.status(StatusCodes.OK).json({
+      message: ReasonPhrases.OK,
+      data: user.toObject({ getters: true }),
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({
+      message: ReasonPhrases.NOT_FOUND,
+    });
+  }
+};
+const deleteUser = async (req, res, next) => {
+  const userId = req.params.id;
+  let user;
+  try {
+    user = await User.findById(userId).exec();
+  } catch (err) {
+    return next(new HttpError("not found", 400));
+  }
+  if (user) {
+    await user.remove();
+    res.status(StatusCodes.OK).json({
+      message: ReasonPhrases.OK,
+      data: "Deleted!!",
+    });
+  } else {
+    res.status(StatusCodes.NOT_FOUND).json({
+      message: ReasonPhrases.NOT_FOUND,
+    });
+  }
+};
+
 exports.signUp = signUp;
 exports.login = login;
+exports.updateUser = updateUser;
+exports.deleteUser = deleteUser;
+

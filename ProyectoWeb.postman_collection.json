@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "09981843-3656-4720-b8c7-41b45a3ab440",
+		"name": "ProyectoWeb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Fotos",
+			"item": [
+				{
+					"name": "Crear foto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"album\":\"62d1d4b63cc378d5dca996d7\",\r\n    \"name\":\"test\",\r\n    \"description\":\"testDescription\",\r\n    \"URL\":\"google.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/albums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Foto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/photos/62d1d508625ac59ce85ed7f5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"photos",
+								"62d1d508625ac59ce85ed7f5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update foto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test\",\r\n    \"description\":\"testDescriptionUpdated\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/photos/62d1d508625ac59ce85ed7f5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"photos",
+								"62d1d508625ac59ce85ed7f5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Albums",
+			"item": [
+				{
+					"name": "Crear Album",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":\"62d1d4b63cc378d5dca996d7\",\r\n    \"name\":\"test\",\r\n    \"description\":\"testDescription\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/albums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update album",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test\",\r\n    \"description\":\"testDescriptionUpdated\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/albums/62d1d508625ac59ce85ed7f5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"albums",
+								"62d1d508625ac59ce85ed7f5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Album",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/albums/62d1d508625ac59ce85ed7f5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"albums",
+								"62d1d508625ac59ce85ed7f5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": []
+		}
+	]
+}
