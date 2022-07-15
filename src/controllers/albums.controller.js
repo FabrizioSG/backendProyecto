@@ -4,8 +4,10 @@ const Album = require("../models/album.model");
 const { ReasonPhrases, StatusCodes } = require("http-status-codes");
 
 const addAlbum = async (req, res, next) => {
+  const {user} = req.user;
+
   const addedAlbum = new Album({
-    user: req.body.user,
+    user: user._id,
     name: req.body.name,
     description: req.body.description,
   });
@@ -21,10 +23,12 @@ const addAlbum = async (req, res, next) => {
 };
 
 //Obtener albums de usuario de la BD
-const getAlbumsByUser = async (req, res) => {
+const getAlbumsByUser = async (req, res, next) => {
   let albums;
+  const userId = req.user.user._id;
+
   try {
-    albums = await Album.findOne({user:req.params.userId}).exec();
+    albums = await Album.find({user:userId}).exec();
   } catch (err) {
     return next(new HttpError(err, 404));
   }
@@ -33,6 +37,7 @@ const getAlbumsByUser = async (req, res) => {
     data: albums,
   });
 };
+
 
 const updateAlbum = async (req, res, next) => {
   const AlbumId = req.params.id;
