@@ -17,4 +17,7 @@ router.put("/", auth, userController.updateUser);
 //DELETE
 router.delete("/", auth, userController.deleteUser);
 
+//RESET PWD
+router.post("/resetPassword", userController.resetPassword);
+
 module.exports = router;
