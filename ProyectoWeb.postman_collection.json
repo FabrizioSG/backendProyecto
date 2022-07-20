@@ -325,6 +325,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Reset pwd",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/users/resetPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"users",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
