@@ -41,7 +41,6 @@ const login = async (req, res, next) => {
   try {
     // Get user input
     const { email, password } = req.body;
-
     // Validate user input
     if (!(email && password)) {
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -52,7 +51,7 @@ const login = async (req, res, next) => {
     // Validate if user exist in our database
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(StatusCodes.NOT_FOUND).json({
+      return res.status(StatusCodes.NOT_FOUND).json({
         message: ReasonPhrases.NOT_FOUND,
       });
     }
